@@ -114,25 +114,32 @@ def move(game_state: typing.Dict) -> typing.Dict:
         return {"move": "down"}
 
     # Choose a random move from the safe ones
-    next_move = random.choice(safe_moves)
+    # next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
     nearestfood = []
-    distactetofood = 99
+    distancetofood = 99
     for fooditem in food:
-        tempdistactetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
-        if tempdistactetofood < distactetofood:
-            distactetofood = tempdistactetofood
+        tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
+        if tempdistancetofood < distancetofood:
+            distactetofood = tempdistancetofood
             nearestfood = fooditem
-    print(nearestfood)
-    print(distactetofood)
-    
-
+    if my_head["x"] > nearestfood["x"]:
+        if is_move_safe["left"]:
+            next_move = "left"
+    elif my_head["x"] < nearestfood["x"]:
+        if is_move_safe["right"]:
+            next_move = "right"
+    elif my_head["y"] < nearestfood["y"]:
+        if is_move_safe["up"]:
+            next_move = "up"
+    elif my_head["y"] < nearestfood["y"]:
+        if is_move_safe["down"]:
+            next_move = "down"
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
-
 
 # Start server when `python main.py` is run
 if __name__ == "__main__":
