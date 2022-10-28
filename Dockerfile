@@ -7,5 +7,8 @@ WORKDIR /usr/app
 # Install dependencies
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Update more often
+ENV PYTHONUNBUFFERED=1
+
 # Run Battlesnake
 CMD [ "python", "main.py" ]
