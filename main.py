@@ -47,6 +47,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     is_move_safe = {"up": True, "down": True, "left": True, "right": True}
 
+    next_move_left = [my_head["x"] - 1, my_head["y"]]
+    next_move_right = [my_head["x"] + 1, my_head["y"]]
+    next_move_down = [my_head["x"], my_head["y"] - 1]
+    next_move_up = [my_head["x"], my_head["y"] + 1]
+
     # We've included code to prevent your Battlesnake from moving backwards
     my_head = game_state["you"]["body"][0]  # Coordinates of your head
     my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
@@ -80,51 +85,25 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["up"] = False
 
     # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
-    my_body = game_state['you']['body']
+    # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
+    snakes = game_state['board']['snakes']
 
     Bodypart = []
-
-    next_move_left = [my_head["x"] - 1, my_head["y"]]
-    next_move_right = [my_head["x"] + 1, my_head["y"]]
-    next_move_down = [my_head["x"], my_head["y"] - 1]
-    next_move_up = [my_head["x"], my_head["y"] + 1]
     
-    for Bodypart in my_body:
-        tempBp = [Bodypart["x"], Bodypart["y"]]
-        if next_move_left == tempBp:  # Body is left of head, don't move left
-            is_move_safe["left"] = False
-        
-        if next_move_right == tempBp:  # Body is right of head, don't move right
-            is_move_safe["right"] = False
-
-        if next_move_down == tempBp:  # Body is below head, don't move down
-            is_move_safe["down"] = False
-
-        if next_move_up == tempBp:  # Body is above head, don't move up
-            is_move_safe["up"] = False
-
-    # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
-    opponents = game_state['board']['snakes']
-    print(opponents)
-    Opponents_Body = game_state["opponents"]["body"]
-
-    BPOpponents = []
-
-    for BPOpponents in Opponents_Body:
-        tempBpOpponenst = [BPOpponents["x"], BPOpponents["y"]]
-        print(tempBpOpponenst)
-        print(next_move_left)
-        if next_move_left == tempBpOpponenst:  # Body is left of head, don't move left
-            is_move_safe["left"] = False
-        
-        if next_move_right == tempBpOpponenst:  # Body is right of head, don't move right
-            is_move_safe["right"] = False
-
-        if next_move_down == tempBpOpponenst:  # Body is below head, don't move down
-            is_move_safe["down"] = False
-
-        if next_move_up == tempBpOpponenst:  # Body is above head, don't move up
-            is_move_safe["up"] = False
+    for snake in snakes:
+        for Bodypart in snake:
+            Bptemp = [Bodypart["x"], Bodypart["y"]]
+            if next_move_left == Bptemp:  # Body is left of head, don't move left
+                is_move_safe["left"] = False
+            
+            if next_move_right == Bptemp:  # Body is right of head, don't move right
+                is_move_safe["right"] = False
+    
+            if next_move_down == Bptemp:  # Body is below head, don't move down
+                is_move_safe["down"] = False
+    
+            if next_move_up == Bptemp:  # Body is above head, don't move up
+                is_move_safe["up"] = False
 
     # Are there any safe moves left?
     safe_moves = []
