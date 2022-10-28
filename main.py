@@ -103,6 +103,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if next_move_up == Bptemp:  # Body is above head, don't move up
                 is_move_safe["up"] = False
 
+    for snake in snakes:
+        for head in snake['head']:
+            print(head)
     # Are there any safe moves left?
     safe_moves = []
     for move, isSafe in is_move_safe.items():
@@ -127,16 +130,12 @@ def move(game_state: typing.Dict) -> typing.Dict:
             nearestfood = fooditem
     if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
         next_move = "left"
-        print(next_move)
     elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
         next_move = "right"
-        print(next_move)
     elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
         next_move = "up"
-        print(next_move)
     elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
         next_move = "down"
-        print(next_move)
     else:
         next_move = random.choice(safe_moves)
 
