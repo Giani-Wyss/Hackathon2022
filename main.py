@@ -21,7 +21,7 @@ def info() -> typing.Dict:
     print("INFO")
 
     return {
-        "apiversion": "2",
+        "apiversion": "1",
         "author": "Giani-Wyss",  # TODO: Your Battlesnake Username
         "color": "#1365C1",  # TODO: Choose color
         "head": "smile",  # TODO: Choose head
