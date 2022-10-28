@@ -117,7 +117,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
     next_move = random.choice(safe_moves)
 
     # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    # food = game_state['board']['food']
+    food = game_state['board']['food']
+    print(food)
 
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
