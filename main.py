@@ -127,6 +127,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             nearestfood = fooditem
     print(nearestfood)
     print(distactetofood)
+    
 
 
     print(f"MOVE {game_state['turn']}: {next_move}")
