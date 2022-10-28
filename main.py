@@ -123,7 +123,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for fooditem in food:
         tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
         if tempdistancetofood < distancetofood:
-            distactetofood = tempdistancetofood
+            distancetofood = tempdistancetofood
             nearestfood = fooditem
     if my_head["x"] > nearestfood["x"]:
         if is_move_safe["left"]:
