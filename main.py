@@ -125,16 +125,16 @@ def move(game_state: typing.Dict) -> typing.Dict:
         if tempdistancetofood < distancetofood:
             distancetofood = tempdistancetofood
             nearestfood = fooditem
-    if my_head["x"] > nearestfood["x"]: #and is_move_safe["left"]:
+    if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
         next_move = "left"
         print(next_move)
-    elif my_head["x"] < nearestfood["x"]: # and is_move_safe["right"]:
+    elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
         next_move = "right"
         print(next_move)
-    elif my_head["y"] > nearestfood["y"]: # and is_move_safe["up"]:
+    elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
         next_move = "up"
         print(next_move)
-    elif my_head["y"] < nearestfood["y"]: # and is_move_safe["down"]:
+    elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
         next_move = "down"
         print(next_move)
     else:
