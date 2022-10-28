@@ -44,7 +44,7 @@ def end(game_state: typing.Dict):
 # See https://docs.battlesnake.com/api/example-move for available data
 def move(game_state: typing.Dict) -> typing.Dict:
 
-    is_move_safe = {"up": False, "down": True, "left": True, "right": True}
+    is_move_safe = {"up": True, "down": True, "left": True, "right": True}
 
     # We've included code to prevent your Battlesnake from moving backwards
     my_head = game_state["you"]["body"][0]  # Coordinates of your head
@@ -66,16 +66,16 @@ def move(game_state: typing.Dict) -> typing.Dict:
     board_width = game_state['board']['width']
     board_height = game_state['board']['height']
 
-    if my_head["x"] == board_width[min]:  # Bound is left of head, don't move left
+    if my_head["x"] == board_width[min+1]:  # Bound is left of head, don't move left
         is_move_safe["left"] = False
 
-    elif my_head["x"] == board_width[max]:  # Bound is right of head, don't move right
+    elif my_head["x"] == board_width[max-1]:  # Bound is right of head, don't move right
         is_move_safe["right"] = False
 
-    elif my_head["y"] == board_height[min]:  # Bound is below head, don't move down
+    elif my_head["y"] == board_height[min+1]:  # Bound is below head, don't move down
         is_move_safe["down"] = False
 
-    elif my_head["y"] == board_height[max]:  # Bound is above head, don't move up
+    elif my_head["y"] == board_height[max-1]:  # Bound is above head, don't move up
         is_move_safe["up"] = False
 
     # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
