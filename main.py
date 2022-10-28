@@ -90,8 +90,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
     next_move_up = [my_head["x"], my_head["y"] + 1]
     
     for Bodypart in my_body:
-        print(Bodypart)
-        temp = [Bodypart["x"], ["y"]]
+        temp = [Bodypart["x"], Bodypart["y"]]
+        print(temp)
         print(next_move_left)
         if next_move_left == temp:  # Body is left of head, don't move left
             is_move_safe["left"] = False
