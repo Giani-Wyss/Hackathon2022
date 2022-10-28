@@ -84,17 +84,17 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for i in my_body:
         print(i)
     print(my_body)
-    if my_head["x"] < my_body["x"]:  # Body is left of head, don't move left
-        is_move_safe["left"] = False
-
-    if my_head["x"] > my_body["x"]:  # Body is right of head, don't move right
-        is_move_safe["right"] = False
-
-    if my_head["y"] < my_body["y"]:  # Body is below head, don't move down
-        is_move_safe["down"] = False
-
-    if my_head["y"] > my_body["y"]:  # Body is above head, don't move up
-        is_move_safe["up"] = False
+    #if my_head["x"] < my_body["x"]:  # Body is left of head, don't move left
+    #    is_move_safe["left"] = False
+#
+    #if my_head["x"] > my_body["x"]:  # Body is right of head, don't move right
+    #    is_move_safe["right"] = False
+#
+    #if my_head["y"] < my_body["y"]:  # Body is below head, don't move down
+    #    is_move_safe["down"] = False
+#
+    #if my_head["y"] > my_body["y"]:  # Body is above head, don't move up
+    #    is_move_safe["up"] = False
 
 
     # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
