@@ -24,9 +24,9 @@ def info() -> typing.Dict:
     return {
         "apiversion": "1",
         "author": "Giani-Wyss",  # TODO: Your Battlesnake Username
-        "color": "#1365C1",  # TODO: Choose color
-        "head": "smile",  # TODO: Choose head
-        "tail": "hook",  # TODO: Choose tail
+        "color": "#000000",  # TODO: Choose color
+        "head": "replit-mark",  # TODO: Choose head
+        "tail": "replit-notmark",  # TODO: Choose tail
     }
 
 
@@ -47,14 +47,14 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     is_move_safe = {"up": True, "down": True, "left": True, "right": True}
 
+    # We've included code to prevent your Battlesnake from moving backwards
+    my_head = game_state["you"]["body"][0]  # Coordinates of your head
+    my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
+
     next_move_left = [my_head["x"] - 1, my_head["y"]]
     next_move_right = [my_head["x"] + 1, my_head["y"]]
     next_move_down = [my_head["x"], my_head["y"] - 1]
     next_move_up = [my_head["x"], my_head["y"] + 1]
-
-    # We've included code to prevent your Battlesnake from moving backwards
-    my_head = game_state["you"]["body"][0]  # Coordinates of your head
-    my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
 
     if my_neck["x"] < my_head["x"]:  # Neck is left of head, don't move left
         is_move_safe["left"] = False
