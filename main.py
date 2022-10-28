@@ -111,6 +111,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     for BPOpponents in Opponents_Body:
         tempBpOpponenst = [BPOpponents["x"], BPOpponents["y"]]
+        print(tempBpOpponenst)
+        print(next_move_left)
         if next_move_left == tempBpOpponenst:  # Body is left of head, don't move left
             is_move_safe["left"] = False
         
