@@ -153,7 +153,9 @@ def move(game_state: typing.Dict) -> typing.Dict:
             is_move_safe["up"] = False
             is_move_ok["up"] = True
 
-    # Are there any safe moves left?
+        #else 
+
+    # TODO: Movement decision
     safe_moves = []
     for safemove, isSafe in is_move_safe.items():
         if isSafe:
@@ -164,14 +166,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
         if isOk:
             ok_moves.append(okmove)
 
-    if len(safe_moves) == 0:
-        print(f"MOVE {game_state['turn']}: No safe moves detected!\nChecking for ok moves!")
-        if len(ok_moves) == 0:
-            print(f"MOVE {game_state['turn']}: No ok move deteced!\nMoving down!")
-            return {"move": "down"}
-        #else 
-
-    # TODO: Step 5 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
     nearestfood = []
     distancetofood = 99
@@ -180,16 +174,32 @@ def move(game_state: typing.Dict) -> typing.Dict:
         if tempdistancetofood < distancetofood:
             distancetofood = tempdistancetofood
             nearestfood = fooditem
-    if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
-        next_move = "left"
-    elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
-        next_move = "right"
-    elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
-        next_move = "up"
-    elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
-        next_move = "down"
+
+    if len(safe_moves) != 0:
+        if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
+            next_move = "left"
+        elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
+            next_move = "right"
+        elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
+            next_move = "up"
+        elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
+            next_move = "down"
+        else:
+            next_move = random.choice(safe_moves)
+    elif len(ok_moves) != 0:
+        if my_head["x"] > nearestfood["x"] and is_move_ok["left"]:
+            next_move = "left"
+        elif my_head["x"] < nearestfood["x"] and is_move_ok["right"]:
+            next_move = "right"
+        elif my_head["y"] < nearestfood["y"] and is_move_ok["up"]:
+            next_move = "up"
+        elif my_head["y"] > nearestfood["y"] and is_move_ok["down"]:
+            next_move = "down"
+        else:
+            next_move = random.choice(is_move_ok)
     else:
-        next_move = random.choice(safe_moves)
+        print(f"MOVE {game_state['turn']}: No safe moves detected!\nMoving down!")
+        next_move = "down"
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
