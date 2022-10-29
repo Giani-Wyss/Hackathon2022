@@ -146,7 +146,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # TODO: Step 5 - Avoid Opponents next move
     for snake in snakes[1:]:
         for Op_head in snake['head']:
-            print(Op_head)
+            print(Op_head["x"])
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
