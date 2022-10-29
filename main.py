@@ -106,7 +106,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     # TODO: Step 4 - Avoid Opponents next move
     op_next_move = []
-    op_heads = ['snakes'][1:]["body"][0]
+    op_heads = ['snakes'][1:]['head']
     for Op_head in op_heads:
         op_next_move_left = [Op_head['x'] - 1, Op_head['y']]
         op_next_move_right = [Op_head['x'] + 1, Op_head['y']]
