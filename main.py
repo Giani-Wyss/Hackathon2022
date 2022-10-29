@@ -52,6 +52,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
 
     my_id = game_state["you"]["id"]
+    print(my_id)
 
     next_move_left = [my_head["x"] - 1, my_head["y"]]
     next_move_right = [my_head["x"] + 1, my_head["y"]]
