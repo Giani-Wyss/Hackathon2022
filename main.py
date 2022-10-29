@@ -101,7 +101,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     snakes = game_state['board']['snakes']
     
     for snake in snakes:
-        for Bodypart in snake['body'][~(len - 1)]:
+        for Bodypart in snake['body'][~(len)]:
             Bptemp = [Bodypart["x"], Bodypart["y"]]
             if next_move_left == Bptemp:  # Body is left of head, don't move left
                 is_move_safe["left"] = False
