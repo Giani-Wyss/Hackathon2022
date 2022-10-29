@@ -109,10 +109,10 @@ def move(game_state: typing.Dict) -> typing.Dict:
     
     for op in snakes[1:]:
         for Op_head in op['head']:
-            op_next_move_left = int([Op_head["x"] - 1, Op_head["y"]])
-            op_next_move_right = int([Op_head["x"] + 1, Op_head["y"]])
-            op_next_move_down = int([Op_head["x"], Op_head["y"] - 1])
-            op_next_move_up = int([Op_head["x"], Op_head["y"] + 1])
+            op_next_move_left = [int(Op_head["x"] - 1), int(Op_head["y"])]
+            op_next_move_right = [int(Op_head["x"] + 1), int(Op_head["y"])]
+            op_next_move_down = [int(Op_head["x"]), int(Op_head["y"] - 1)]
+            op_next_move_up = [int(Op_head["x"]), int(Op_head["y"] + 1)]
             op_next_move.append(op_next_move_left)
             op_next_move.append(op_next_move_right)
             op_next_move.append(op_next_move_down)
