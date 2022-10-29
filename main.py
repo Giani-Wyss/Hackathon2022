@@ -152,13 +152,15 @@ def move(game_state: typing.Dict) -> typing.Dict:
             op_next_move.append(op_next_move_down)
             op_next_move.append(op_next_move_up)
             for Op_move in op_next_move:
+                print(Op_move)
+                print(next_move_up)
                 if Op_move == next_move_left:
                     is_move_safe["left"] = False
-                if Op_move == op_next_move_right:
+                if Op_move == next_move_right:
                     is_move_safe["right"] = False
-                if Op_move == op_next_move_down:
+                if Op_move == next_move_down:
                     is_move_safe["down"] = False
-                if Op_move == op_next_move_up:
+                if Op_move == next_move_up:
                     is_move_safe["up"] = False
 
     # Movement
