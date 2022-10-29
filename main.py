@@ -77,7 +77,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["up"] = False
         is_move_ok["up"] = False
 
-    # TODO: Step 1 - Prevent your Battlesnake from moving out of bounds
+    # Prevent your Battlesnake from moving out of bounds
     board_width = game_state['board']['width'] - 1
     board_height = game_state['board']['height'] - 1
 
@@ -97,8 +97,8 @@ def move(game_state: typing.Dict) -> typing.Dict:
         is_move_safe["up"] = False
         is_move_ok["up"] = False
 
-    # TODO: Step 2 - Prevent your Battlesnake from colliding with itself
-    # TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
+    # Prevent your Battlesnake from colliding with itself
+    # Prevent your Battlesnake from colliding with other Battlesnakes
     snakes = game_state['board']['snakes']
     
     for snake in snakes:
@@ -175,32 +175,69 @@ def move(game_state: typing.Dict) -> typing.Dict:
         if tempdistancetofood < distancetofood:
             distancetofood = tempdistancetofood
             nearestfood = fooditem
+   
+    lowestop = []
+    distancetoop = 99
+    for f_op in snakes_copy:
+        tempdistancetoop = abs(f_op["x"] - my_head["x"]) + abs(f_op["y"] - my_head["y"])
+        if tempdistancetoop < distancetoop:
+            distancetoop = tempdistancetoop
+            lowestop = f_op
 
-    if len(safe_moves) != 0:
-        if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
-            next_move = "left"
-        elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
-            next_move = "right"
-        elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
-            next_move = "up"
-        elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
-            next_move = "down"
-        else:
-            next_move = random.choice(safe_moves)
-    elif len(ok_moves) != 0:
-        if my_head["x"] > nearestfood["x"] and is_move_ok["left"]:
-            next_move = "left"
-        elif my_head["x"] < nearestfood["x"] and is_move_ok["right"]:
-            next_move = "right"
-        elif my_head["y"] < nearestfood["y"] and is_move_ok["up"]:
-            next_move = "up"
-        elif my_head["y"] > nearestfood["y"] and is_move_ok["down"]:
-            next_move = "down"
-        else:
-            next_move = random.choice(ok_moves)
-    else:
-        print(f"MOVE {game_state['turn']}: No safe moves detected!\nMoving randomly!")
-        next_move = random.choice(ok_moves)
+        for s_op in snakes_copy:
+            op_length = s_op["length"]
+            if my_length <= op_length:
+                if len(safe_moves) != 0:
+                    if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
+                        next_move = "left"
+                    elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
+                        next_move = "right"
+                    elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
+                        next_move = "up"
+                    elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
+                        next_move = "down"
+                    else:
+                        next_move = random.choice(safe_moves)
+                elif len(ok_moves) != 0:
+                    if my_head["x"] > nearestfood["x"] and is_move_ok["left"]:
+                        next_move = "left"
+                    elif my_head["x"] < nearestfood["x"] and is_move_ok["right"]:
+                        next_move = "right"
+                    elif my_head["y"] < nearestfood["y"] and is_move_ok["up"]:
+                        next_move = "up"
+                    elif my_head["y"] > nearestfood["y"] and is_move_ok["down"]:
+                        next_move = "down"
+                    else:
+                        next_move = random.choice(ok_moves)
+                else:
+                    print(f"MOVE {game_state['turn']}: No safe moves detected!\nMoving randomly!")
+                    next_move = random.choice(ok_moves)
+            else:
+                if len(safe_moves) != 0:
+                    if my_head["x"] > lowestop["x"] and is_move_safe["left"]:
+                        next_move = "left"
+                    elif my_head["x"] < lowestop["x"] and is_move_safe["right"]:
+                        next_move = "right"
+                    elif my_head["y"] < lowestop["y"] and is_move_safe["up"]:
+                        next_move = "up"
+                    elif my_head["y"] > lowestop["y"] and is_move_safe["down"]:
+                        next_move = "down"
+                    else:
+                        next_move = random.choice(safe_moves)
+                elif len(ok_moves) != 0:
+                    if my_head["x"] > lowestop["x"] and is_move_ok["left"]:
+                        next_move = "left"
+                    elif my_head["x"] < lowestop["x"] and is_move_ok["right"]:
+                        next_move = "right"
+                    elif my_head["y"] < lowestop["y"] and is_move_ok["up"]:
+                        next_move = "up"
+                    elif my_head["y"] > lowestop["y"] and is_move_ok["down"]:
+                        next_move = "down"
+                    else:
+                        next_move = random.choice(ok_moves)
+                else:
+                    print(f"MOVE {game_state['turn']}: No safe moves detected!\nMoving randomly!")
+                    next_move = random.choice(ok_moves)
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
