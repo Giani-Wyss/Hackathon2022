@@ -166,7 +166,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             ok_moves.append(okmove)
 
     food = game_state['board']['food']
-    if food == 0:
+    if food == []:
         next_move = random.choice(safe_moves)
     else:
         nearestfood = []
