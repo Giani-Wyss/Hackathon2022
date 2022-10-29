@@ -178,7 +178,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
    
     lowestop = []
     distancetoop = 99
-    for f_op in snakes_copy:
+    for f_op in snakes_copy['head']:
         tempdistancetoop = abs(f_op["x"] - my_head["x"]) + abs(f_op["y"] - my_head["y"])
         if tempdistancetoop < distancetoop:
             distancetoop = tempdistancetoop
