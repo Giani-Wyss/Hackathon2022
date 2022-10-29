@@ -10,6 +10,7 @@
 # To get you started we've included code to prevent your Battlesnake from moving backwards.
 # For more info see docs.battlesnake.com
 
+from operator import index
 import random
 from re import I, X
 import typing
@@ -143,7 +144,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = random.choice(safe_moves)
 
     # TODO: Step 5 - Avoid Opponents next move
-    for snake in snakes[snakes] + 1:
+    for snake in snakes[index] + 1:
         for Op_head in snake['head']:
             print(Op_head)
 
