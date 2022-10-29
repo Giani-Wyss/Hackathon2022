@@ -50,6 +50,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # We've included code to prevent your Battlesnake from moving backwards
     my_head = game_state["you"]["body"][0]  # Coordinates of your head
     my_neck = game_state["you"]["body"][1]  # Coordinates of your "neck"
+    my_length = game_state["you"]["length"]
 
     my_id = game_state["you"]["id"]
     print(my_id)
@@ -128,32 +129,32 @@ def move(game_state: typing.Dict) -> typing.Dict:
     for snk in snakes:
         if snk['id'] != my_id:
             snakes_copy.append(snk)
-    for op in snakes_copy:
-        Op_head = op['head']
-        op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
-        op_next_move_right = [Op_head["x"] + 1, Op_head["y"]]
-        op_next_move_down = [Op_head["x"], Op_head["y"] - 1]
-        op_next_move_up = [Op_head["x"], Op_head["y"] + 1]
-        op_next_move.append(op_next_move_left)
-        op_next_move.append(op_next_move_right)
-        op_next_move.append(op_next_move_down)
-        op_next_move.append(op_next_move_up)
-
-    for Op_move in op_next_move:
-        if Op_move == next_move_left:
-            is_move_safe["left"] = False
-            is_move_ok["left"] = True
-        if Op_move == next_move_right:
-            is_move_safe["right"] = False
-            is_move_ok["right"] = True
-        if Op_move == next_move_down:
-            is_move_safe["down"] = False
-            is_move_ok["down"] = True
-        if Op_move == next_move_up:
-            is_move_safe["up"] = False
-            is_move_ok["up"] = True
-
-        #else 
+        for op in snakes_copy:
+            Op_head = op['head']
+            op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
+            op_next_move_right = [Op_head["x"] + 1, Op_head["y"]]
+            op_next_move_down = [Op_head["x"], Op_head["y"] - 1]
+            op_next_move_up = [Op_head["x"], Op_head["y"] + 1]
+            op_next_move.append(op_next_move_left)
+            op_next_move.append(op_next_move_right)
+            op_next_move.append(op_next_move_down)
+            op_next_move.append(op_next_move_up)
+        for s in snakes_copy:
+            op_length = s["length"]
+            if my_length <= op_length:
+                for Op_move in op_next_move:
+                    if Op_move == next_move_left:
+                        is_move_safe["left"] = False
+                        is_move_ok["left"] = True
+                    if Op_move == next_move_right:
+                        is_move_safe["right"] = False
+                        is_move_ok["right"] = True
+                    if Op_move == next_move_down:
+                        is_move_safe["down"] = False
+                        is_move_ok["down"] = True
+                    if Op_move == next_move_up:
+                        is_move_safe["up"] = False
+                        is_move_ok["up"] = True 
 
     # Movement decision
     safe_moves = []
