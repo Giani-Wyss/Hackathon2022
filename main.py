@@ -104,16 +104,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if next_move_up == Bptemp:  # Body is above head, don't move up
                 is_move_safe["up"] = False
 
-    # Are there any safe moves left?
-    safe_moves = []
-    for move, isSafe in is_move_safe.items():
-        if isSafe:
-            safe_moves.append(move)
-
-    if len(safe_moves) == 0:
-        print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
-        return {"move": "down"}
-
     # Choose a random move from the safe ones
     # next_move = random.choice(safe_moves)
 
@@ -138,30 +128,37 @@ def move(game_state: typing.Dict) -> typing.Dict:
         next_move = random.choice(safe_moves)
 
     # TODO: Step 5 - Avoid Opponents next move
-    print(snakes)
-#    op_next_move = []
-#
-#    for opponent in snakes[1:]:
-#        for Op_head in opponent['body'][0]:
-#            op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
-#            op_next_move_right = [Op_head["x"] + 1, Op_head["y"]]
-#            op_next_move_down = [Op_head["x"], Op_head["y"] - 1]
-#            op_next_move_up = [Op_head["x"], Op_head["y"] + 1]
-#            op_next_move.append(op_next_move_left)
-#            op_next_move.append(op_next_move_right)
-#            op_next_move.append(op_next_move_down)
-#            op_next_move.append(op_next_move_up)
-#            for Op_move in op_next_move:
-#                print(Op_move)
-#                print(Op_head)
-#                if Op_move == next_move_left:
-#                    is_move_safe["left"] = False
-#                if Op_move == next_move_right:
-#                    is_move_safe["right"] = False
-#                if Op_move == next_move_down:
-#                    is_move_safe["down"] = False
-#                if Op_move == next_move_up:
-#                    is_move_safe["up"] = False
+    op_next_move = []
+
+    for opponent in snakes[1:]:
+        for Op_head in opponent['head']:
+            op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
+            op_next_move_right = [Op_head["x"] + 1, Op_head["y"]]
+            op_next_move_down = [Op_head["x"], Op_head["y"] - 1]
+            op_next_move_up = [Op_head["x"], Op_head["y"] + 1]
+            op_next_move.append(op_next_move_left)
+            op_next_move.append(op_next_move_right)
+            op_next_move.append(op_next_move_down)
+            op_next_move.append(op_next_move_up)
+            for Op_move in op_next_move:
+                if Op_move == next_move_left:
+                    is_move_safe["left"] = False
+                if Op_move == next_move_right:
+                    is_move_safe["right"] = False
+                if Op_move == next_move_down:
+                    is_move_safe["down"] = False
+                if Op_move == next_move_up:
+                    is_move_safe["up"] = False
+
+    # Are there any safe moves left?
+    safe_moves = []
+    for move, isSafe in is_move_safe.items():
+        if isSafe:
+            safe_moves.append(move)
+
+    if len(safe_moves) == 0:
+        print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
+        return {"move": "down"}
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
