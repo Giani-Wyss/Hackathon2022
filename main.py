@@ -237,7 +237,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
                     else:
                         next_move = random.choice(ok_moves)
                 else:
-                    print(f"MOVE {game_state['turn']}: No safe moves detected!\nMoving randomly!")
+                    print(f"MOVE {game_state['turn']}: No ok moves detected!\nMoving randomly!")
                     next_move = random.choice(ok_moves)
 
     # Movement
