@@ -10,11 +10,8 @@
 # To get you started we've included code to prevent your Battlesnake from moving backwards.
 # For more info see docs.battlesnake.com
 
-from operator import index
 import random
-from re import I, X
 import typing
-
 
 # info is called when you create your Battlesnake on play.battlesnake.com
 # and controls your Battlesnake's appearance
@@ -140,7 +137,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     if len(safe_moves) == 0:
         print(f"MOVE {game_state['turn']}: No safe moves detected! Moving down")
         return {"move": "down"}
-        
+
     # TODO: Step 5 - Move towards food instead of random, to regain health and survive longer
     food = game_state['board']['food']
     nearestfood = []
