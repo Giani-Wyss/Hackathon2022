@@ -124,7 +124,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     # TODO: Step 4 - Avoid Opponents next move
     op_next_move = []
-    for op in snakes[~(['id']==['my_id'])]:
+    snakes_copy = []
+    for snk in snakes:
+        if snk['id'] != my_id:
+            snakes_copy.append(snk)
+    for op in snakes_copy:
         Op_head = op['head']
         op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
         op_next_move_right = [Op_head["x"] + 1, Op_head["y"]]
