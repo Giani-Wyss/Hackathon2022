@@ -107,27 +107,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # Choose a random move from the safe ones
     # next_move = random.choice(safe_moves)
 
-    # TODO: Step 4 - Move towards food instead of random, to regain health and survive longer
-    food = game_state['board']['food']
-    nearestfood = []
-    distancetofood = 99
-    for fooditem in food:
-        tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
-        if tempdistancetofood < distancetofood:
-            distancetofood = tempdistancetofood
-            nearestfood = fooditem
-    if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
-        next_move = "left"
-    elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
-        next_move = "right"
-    elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
-        next_move = "up"
-    elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
-        next_move = "down"
-    else:
-        next_move = random.choice(safe_moves)
-
-    # TODO: Step 5 - Avoid Opponents next move
+    # TODO: Step 4 - Avoid Opponents next move
     op_next_move = []
     
     for op in snakes[1:]:
@@ -150,6 +130,26 @@ def move(game_state: typing.Dict) -> typing.Dict:
                     is_move_safe["down"] = False
                 if Op_move == next_move_up:
                     is_move_safe["up"] = False
+
+    # TODO: Step 5 - Move towards food instead of random, to regain health and survive longer
+    food = game_state['board']['food']
+    nearestfood = []
+    distancetofood = 99
+    for fooditem in food:
+        tempdistancetofood = abs(fooditem["x"] - my_head["x"]) + abs(fooditem["y"] - my_head["y"])
+        if tempdistancetofood < distancetofood:
+            distancetofood = tempdistancetofood
+            nearestfood = fooditem
+    if my_head["x"] > nearestfood["x"] and is_move_safe["left"]:
+        next_move = "left"
+    elif my_head["x"] < nearestfood["x"] and is_move_safe["right"]:
+        next_move = "right"
+    elif my_head["y"] < nearestfood["y"] and is_move_safe["up"]:
+        next_move = "up"
+    elif my_head["y"] > nearestfood["y"] and is_move_safe["down"]:
+        next_move = "down"
+    else:
+        next_move = random.choice(safe_moves)
 
     # Are there any safe moves left?
     safe_moves = []
