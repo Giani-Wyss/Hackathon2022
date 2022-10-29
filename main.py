@@ -56,6 +56,12 @@ def move(game_state: typing.Dict) -> typing.Dict:
     next_move_down = [my_head["x"], my_head["y"] - 1]
     next_move_up = [my_head["x"], my_head["y"] + 1]
 
+    op_next_move_left = [my_head["x"] - 1, my_head["y"]]
+    op_next_move_right = [my_head["x"] + 1, my_head["y"]]
+    op_next_move_down = [my_head["x"], my_head["y"] - 1]
+    op_next_move_up = [my_head["x"], my_head["y"] + 1]
+
+
     if my_neck["x"] < my_head["x"]:  # Neck is left of head, don't move left
         is_move_safe["left"] = False
 
@@ -103,9 +109,6 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if next_move_up == Bptemp:  # Body is above head, don't move up
                 is_move_safe["up"] = False
 
-    for snake in snakes:
-        for head in snake['head']:
-            print(head)
     # Are there any safe moves left?
     safe_moves = []
     for move, isSafe in is_move_safe.items():
@@ -139,6 +142,12 @@ def move(game_state: typing.Dict) -> typing.Dict:
     else:
         next_move = random.choice(safe_moves)
 
+    # TODO: Step 5 - Avoid Opponents next move
+    for snake in snakes[+1]:
+        for Op_head in snake['head']:
+            print(Op_head)
+
+    # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
     return {"move": next_move}
 
