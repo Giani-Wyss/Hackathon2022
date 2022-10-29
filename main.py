@@ -101,7 +101,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     snakes = game_state['board']['snakes']
     
     for snake in snakes:
-        for Bodypart in snake['body']:
+        for Bodypart in snake['body'][~(len - 1)]:
             Bptemp = [Bodypart["x"], Bodypart["y"]]
             if next_move_left == Bptemp:  # Body is left of head, don't move left
                 is_move_safe["left"] = False
@@ -110,7 +110,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             if next_move_right == Bptemp:  # Body is right of head, don't move right
                 is_move_safe["right"] = False
                 is_move_ok["right"] = False
-    
+
             if next_move_down == Bptemp:  # Body is below head, don't move down
                 is_move_safe["down"] = False
                 is_move_ok["down"] = False
@@ -122,7 +122,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
     # Choose a random move from the safe ones
     # next_move = random.choice(safe_moves)
 
-    # TODO: Step 4 - Avoid Opponents next move
+    # Avoid Opponents next move
     op_next_move = []
     snakes_copy = []
     for snk in snakes:
@@ -155,7 +155,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
         #else 
 
-    # TODO: Movement decision
+    # Movement decision
     safe_moves = []
     for safemove, isSafe in is_move_safe.items():
         if isSafe:
@@ -196,10 +196,10 @@ def move(game_state: typing.Dict) -> typing.Dict:
         elif my_head["y"] > nearestfood["y"] and is_move_ok["down"]:
             next_move = "down"
         else:
-            next_move = random.choice(is_move_ok)
+            next_move = random.choice(ok_moves)
     else:
-        print(f"MOVE {game_state['turn']}: No safe moves detected!\nMoving down!")
-        next_move = "down"
+        print(f"MOVE {game_state['turn']}: No safe moves detected!\nMoving randomly!")
+        next_move = random.choice(ok_moves)
 
     # Movement
     print(f"MOVE {game_state['turn']}: {next_move}")
