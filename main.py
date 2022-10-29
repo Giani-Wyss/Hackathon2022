@@ -129,7 +129,11 @@ def move(game_state: typing.Dict) -> typing.Dict:
 
     # TODO: Step 5 - Avoid Opponents next move
     op_next_move = []
-
+    op_next_move_left = []
+    op_next_move_right = []
+    op_next_move_down = []
+    op_next_move_up = []
+    
     for op in snakes[1:]:
         for Op_head in op['head']:
             op_next_move_left = [Op_head["x"] - 1, Op_head["y"]]
@@ -140,6 +144,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             op_next_move.append(op_next_move_right)
             op_next_move.append(op_next_move_down)
             op_next_move.append(op_next_move_up)
+
             for Op_move in op_next_move:
                 if Op_move == next_move_left:
                     is_move_safe["left"] = False
