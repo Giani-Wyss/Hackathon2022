@@ -165,6 +165,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
             ok_moves.append(okmove)
 
     food = game_state['board']['food']
+    
     nearestfood = []
     distancetofood = 99
     for fooditem in food:
@@ -172,7 +173,7 @@ def move(game_state: typing.Dict) -> typing.Dict:
         if tempdistancetofood < distancetofood:
             distancetofood = tempdistancetofood
             nearestfood = fooditem
-
+   
     lowestop = []
     distancetoop = 99
     for f_op in snakes_copy:
